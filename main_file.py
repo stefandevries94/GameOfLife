@@ -55,6 +55,13 @@ class GUI:
         cell_size_entry.insert(0, 5)
         cell_size_entry.grid(row=7, column=1)
 
+        speed_label = tk.Label(master, text="Frames per second")
+        speed_label.grid(row=8, column=0, sticky=tk.W)
+        self.speed_entry = tk.StringVar()
+        speed_entry = tk.Entry(master, textvariable=self.speed_entry, justify=tk.RIGHT)
+        speed_entry.insert(0, 8)
+        speed_entry.grid(row=8, column=1)
+
         # SAVE SETTINGS
         save_button = tk.Button(master, text="Save settings", command=self.clicked)
         save_button.grid(row=10, column=1)
@@ -73,6 +80,7 @@ class GUI:
         self.width = self.window_size_width.get()
         self.height = self.window_size_height.get()
         self.cell_size = self.cell_size_entry.get()
+        self.speed = self.speed_entry.get()
 
     def game_start(self):
         game = LifeGame()
@@ -88,7 +96,6 @@ class GUI:
 
 dead = 0, 0, 0
 alive = 0, 255, 255
-fps = 10
 
 
 class LifeGame:
@@ -100,7 +107,7 @@ class LifeGame:
         pygame.display.flip()
 
         self.last_update_completed = 0
-        self.ms_between_updates = (1.0 / fps) * 1000.0
+        self.ms_between_updates = (1.0 / int(my_gui.speed)) * 1000.0
 
         self.active_grid = 0
         self.grids = []
@@ -172,14 +179,14 @@ class LifeGame:
         num_alive_neighbors += self.get_cell(row_index + 1, col_index + 1)
 
         if self.grids[self.active_grid][row_index][col_index] == 1: # alive
-            if num_alive_neighbors > 3:  # overpopulation
+            if num_alive_neighbors > int(my_gui.overpop_value):  # overpopulation
                 return 0
-            if num_alive_neighbors < 2:  # underpopulation
+            if num_alive_neighbors < int(my_gui.underpop_value):  # underpopulation
                 return 0
-            if num_alive_neighbors == 2 or num_alive_neighbors == 3:
+            if num_alive_neighbors >= int(my_gui.underpop_value) and num_alive_neighbors <= int(my_gui.overpop_value):
                 return 1
         elif self.grids[self.active_grid][row_index][col_index] == 0: # dead
-            if num_alive_neighbors == 3:  # birth
+            if num_alive_neighbors == int(my_gui.birth_value):  # birth
                 return 1
 
         return self.grids[self.active_grid][row_index][col_index]
@@ -213,7 +220,6 @@ class LifeGame:
                 elif event.unicode == 'q':
                     print("exit")
                     self.game_over = True
-
 
     def run(self):
         while True:
