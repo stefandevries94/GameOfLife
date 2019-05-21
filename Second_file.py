@@ -2,19 +2,17 @@ import tkinter as tk
 import random
 
 
-
-
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.canvas = tk.Canvas(self, width=500, height=500, borderwidth=0, highlightthickness=0)
         self.canvas.pack(side="top", fill="both", expand="true")
+
+
         self.cellwidth = 10
         self.cellheight = 10
         self.num_col = int(500 / self.cellwidth)
         self.num_row =int(500 / self.cellheight)
-
-
 
         self.clear_screen()
 
@@ -24,17 +22,16 @@ class App(tk.Tk):
         self.set_grid()
         self.draw_canvas()
 
-        self.redraw(100)
+        self.speed = 100
+        self.game_over = False
 
+        start_button = tk.Button(self, text="Start", command=self.run)
+        start_button.pack()
 
-
-
-
-
-
+        stop_button = tk.Button(self, text="Stop", command=self.stop_game)
+        stop_button.pack()
 
     def init_grids(self):
-
         def create_grid():
             rows = []
             for row_num in range(self.num_row):
@@ -79,17 +76,12 @@ class App(tk.Tk):
                 self.y2 = self.y1 + self.cellheight
                 self.rect[(row, column)] = self.canvas.create_rectangle(self.x1, self.y1, self.x2, self.y2, fill="white", tags="rect")
 
-
-
-
     def get_cell(self, r, c):
         try:
             cell_value = self.grids[self.active_grid][r][c]
         except:
             cell_value = 0
         return cell_value
-
-
 
     def check_neighbors(self, row_index, col_index):
         num_alive_neighbors = 0
@@ -118,7 +110,6 @@ class App(tk.Tk):
         return self.grids[self.active_grid][row_index][col_index]
 
     def update_generation(self):
-        # self.set_grid(0)
         for r in range(self.num_row):
             for c in range(self.num_col):
                 next_gen_state = self.check_neighbors(r, c)
@@ -129,12 +120,8 @@ class App(tk.Tk):
         return (self.active_grid + 1) % 2
 
     def redraw(self, delay):
-
-        # self.canvas.itemconfig("rect", fill="white")
-
-        # self.draw_canvas()
-
-
+        if self.game_over == True:
+            return
         for r in range(self.num_row):
             for c in range(self.num_col):
                 if self.grids[self.active_grid][r][c] == 1:
@@ -147,9 +134,12 @@ class App(tk.Tk):
         self.after(delay, lambda: self.redraw(delay))
         self.update_generation()
 
+    def stop_game(self):
+        self.game_over = True
 
+    def run(self):
 
-
+        self.redraw(self.speed)
 
 
 if __name__ == "__main__":
