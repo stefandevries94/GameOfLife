@@ -230,6 +230,7 @@ class LifeGame:
                 continue
             self.update_generation()
             self.draw_grid()
+            print(self.inactive_grid)
             self.cap_frame_rate()
             # pygame.time.wait(300)
 
