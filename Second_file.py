@@ -8,28 +8,31 @@ class App(tk.Tk):
         self.canvas = tk.Canvas(self, width=500, height=500, borderwidth=0, highlightthickness=0)
         self.canvas.pack(side="top", fill="both", expand="true")
 
-
+        # Game settings
         self.cellwidth = 10
         self.cellheight = 10
         self.num_col = int(500 / self.cellwidth)
         self.num_row =int(500 / self.cellheight)
+        self.speed = 100
 
-        self.clear_screen()
-
+        # Game initialization
         self.active_grid = 0
         self.grids = []
         self.init_grids()
         self.set_grid()
         self.draw_canvas()
+        self.clear_screen()
+        self.game_over = -1
 
-        self.speed = 100
-        self.game_over = False
-
+        # Interface
         start_button = tk.Button(self, text="Start", command=self.run)
         start_button.pack()
 
         stop_button = tk.Button(self, text="Stop", command=self.stop_game)
         stop_button.pack()
+
+        reset_button = tk.Button(self, text="Reset", command=self.reset_game)
+        reset_button.pack()
 
     def init_grids(self):
         def create_grid():
@@ -119,26 +122,31 @@ class App(tk.Tk):
     def inactive_grid(self):
         return (self.active_grid + 1) % 2
 
-    def redraw(self, delay):
-        if self.game_over == True:
-            return
-        for r in range(self.num_row):
-            for c in range(self.num_col):
-                if self.grids[self.active_grid][r][c] == 1:
-                    color = "black"
-
-                else:
-                    color = "white"
-                self.canvas.itemconfig(self.rect[(r,c)], fill=color)
-
-        self.after(delay, lambda: self.redraw(delay))
-        self.update_generation()
-
     def stop_game(self):
-        self.game_over = True
+        self.game_over = self.game_over*-1
+
+    def reset_game(self):
+        self.active_grid = 0
+        self.set_grid(None)
+
+    def redraw(self, delay):
+        if self.game_over == 1:
+            print("stopped")
+        else:
+            for r in range(self.num_row):
+                for c in range(self.num_col):
+                    if self.grids[self.active_grid][r][c] == 1:
+                        color = "black"
+
+                    else:
+                        color = "white"
+                    self.canvas.itemconfig(self.rect[(r,c)], fill=color)
+
+            self.after(delay, lambda: self.redraw(delay))
+            self.update_generation()
 
     def run(self):
-
+        self.game_over = -1
         self.redraw(self.speed)
 
 
