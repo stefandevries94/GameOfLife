@@ -6,7 +6,7 @@ class Test(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.canvas = tk.Canvas(self, width=500, height=500, borderwidth=0, highlightthickness=0)
-        self.canvas.pack(side="top", fill="both", expand="true")
+        self.canvas.pack(side="top", expand="true")
 
         # GAME SETTINGS
         self.cellwidth = self.cellheight = 10
@@ -26,36 +26,41 @@ class Test(tk.Tk):
         self.game_over = -1
 
         # SIMULATION BUTTONS
-        start_button = tk.Button(self, text="Start", command=self.run)
-        start_button.pack()
+        self.button_frame = tk.Frame()
+        self.button_frame.pack()
+        start_button = tk.Button(self.button_frame, text="Start", command=self.run)
+        start_button.pack(side="left")
 
-        stop_button = tk.Button(self, text="Stop", command=self.stop_game)
-        stop_button.pack()
+        stop_button = tk.Button(self.button_frame, text="Stop", command=self.stop_game)
+        stop_button.pack(side="left")
 
-        reset_button = tk.Button(self, text="Reset", command=self.reset_game)
-        reset_button.pack()
+        reset_button = tk.Button(self.button_frame, text="Reset", command=self.reset_game)
+        reset_button.pack(side="left")
 
         # GAME RULES
-        overpop_label = tk.Label(self, text="A cell is overpopulated with more than X alive neighbours.")
-        overpop_label.pack()
+        self.rules_frame = tk.Frame()
+        self.rules_frame.pack()
+
+        overpop_label = tk.Label(self.rules_frame, text="A cell is overpopulated with more than X alive neighbours.")
+        overpop_label.grid(row=0, column=0)
         self.overpop_entry = tk.StringVar()
-        overpop = tk.Entry(self, textvariable=self.overpop_entry, justify=tk.RIGHT)
+        overpop = tk.Entry(self.rules_frame, textvariable=self.overpop_entry, justify=tk.RIGHT, width=2)
         overpop.insert(0, 3)
-        overpop.pack()
+        overpop.grid(row=0, column=1)
 
-        underpop_label = tk.Label(self, text="A cell is underpopulated with less than X alive neighbours.")
-        underpop_label.pack()
+        underpop_label = tk.Label(self.rules_frame, text="A cell is underpopulated with less than X alive neighbours.")
+        underpop_label.grid(row=1, column=0)
         self.underpop_entry = tk.StringVar()
-        underpop = tk.Entry(self, textvariable=self.underpop_entry, justify=tk.RIGHT)
+        underpop = tk.Entry(self.rules_frame, textvariable=self.underpop_entry, justify=tk.RIGHT, width=2)
         underpop.insert(0, 2)
-        underpop.pack()
+        underpop.grid(row=1, column=1)
 
-        birth_label = tk.Label(self, text="A dead cell with X alive neighbours comes back to live.")
-        birth_label.pack()
+        birth_label = tk.Label(self.rules_frame, text="A dead cell with X alive neighbours comes back to live.")
+        birth_label.grid(row=2, column=0)
         self.birth_entry = tk.StringVar()
-        birth = tk.Entry(self, textvariable=self.birth_entry, justify=tk.RIGHT)
+        birth = tk.Entry(self.rules_frame, textvariable=self.birth_entry, justify=tk.RIGHT, width=2)
         birth.insert(0, 3)
-        birth.pack()
+        birth.grid(row=2, column=1)
 
 
 
