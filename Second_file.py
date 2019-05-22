@@ -9,10 +9,10 @@ class App(tk.Tk):
         self.canvas.pack(side="top", fill="both", expand="true")
 
         # Game settings
-        self.cellwidth = 10
-        self.cellheight = 10
+        self.cellwidth = 25
+        self.cellheight = 25
         self.num_col = int(500 / self.cellwidth)
-        self.num_row =int(500 / self.cellheight)
+        self.num_row = int(500 / self.cellheight)
         self.speed = 100
 
         # Game initialization
@@ -23,6 +23,7 @@ class App(tk.Tk):
         self.draw_canvas()
         self.clear_screen()
         self.game_over = -1
+        self.running = False
 
         # Interface
         start_button = tk.Button(self, text="Start", command=self.run)
@@ -67,7 +68,7 @@ class App(tk.Tk):
                     color = "black"
                 else:
                     color = "white"
-                self.rect[(row,column)] = self.canvas.create_rectangle(x1,y1,x2,y2, fill=color, tags="rect")
+                self.rect[(row,column)] = self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, tags="rect")
 
     def clear_screen(self):
         self.rect = dict()
@@ -124,6 +125,7 @@ class App(tk.Tk):
 
     def stop_game(self):
         self.game_over = self.game_over*-1
+        self.running = False
 
     def reset_game(self):
         self.active_grid = 0
@@ -146,8 +148,13 @@ class App(tk.Tk):
             self.update_generation()
 
     def run(self):
-        self.game_over = -1
-        self.redraw(self.speed)
+        if self.running == False:
+            self.running = True
+            self.game_over = -1
+            self.redraw(self.speed)
+        else:
+            print("game is already running")
+
 
 
 if __name__ == "__main__":
