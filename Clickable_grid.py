@@ -8,9 +8,9 @@ class Test(tk.Tk):
         self.canvas = tk.Canvas(self, width=500, height=500, borderwidth=0, highlightthickness=0)
         self.canvas.pack(side="top", fill="both", expand="true")
 
-        # Game settings
-        self.cellwidth = 10
-        self.cellheight = 10
+        # GAME SETTINGS
+        self.cellwidth = self.cellheight = 10
+        print(self.cellwidth)
         self.num_col = int(500 / self.cellwidth)
         self.num_row = int(500 / self.cellheight)
         self.speed = 100
@@ -25,7 +25,7 @@ class Test(tk.Tk):
 
         self.game_over = -1
 
-
+        # SIMULATION BUTTONS
         start_button = tk.Button(self, text="Start", command=self.run)
         start_button.pack()
 
@@ -34,6 +34,29 @@ class Test(tk.Tk):
 
         reset_button = tk.Button(self, text="Reset", command=self.reset_game)
         reset_button.pack()
+
+        # GAME RULES
+        overpop_label = tk.Label(self, text="A cell is overpopulated with more than X alive neighbours.")
+        overpop_label.pack()
+        self.overpop_entry = tk.StringVar()
+        overpop = tk.Entry(self, textvariable=self.overpop_entry, justify=tk.RIGHT)
+        overpop.insert(0, 3)
+        overpop.pack()
+
+        underpop_label = tk.Label(self, text="A cell is underpopulated with less than X alive neighbours.")
+        underpop_label.pack()
+        self.underpop_entry = tk.StringVar()
+        underpop = tk.Entry(self, textvariable=self.underpop_entry, justify=tk.RIGHT)
+        underpop.insert(0, 2)
+        underpop.pack()
+
+        birth_label = tk.Label(self, text="A dead cell with X alive neighbours comes back to live.")
+        birth_label.pack()
+        self.birth_entry = tk.StringVar()
+        birth = tk.Entry(self, textvariable=self.birth_entry, justify=tk.RIGHT)
+        birth.insert(0, 3)
+        birth.pack()
+
 
 
     def init_grids(self):
@@ -111,14 +134,14 @@ class Test(tk.Tk):
         num_alive_neighbors += self.get_cell(row_index + 1, col_index + 1)
 
         if self.grids[self.active_grid][row_index][col_index] == 1:  # alive
-            if num_alive_neighbors > 3:  # overpopulation
+            if num_alive_neighbors > int(self.overpop_entry.get()):  # overpopulation
                 return 0
-            if num_alive_neighbors < 2:  # underpopulation
+            if num_alive_neighbors < int(self.underpop_entry.get()):  # underpopulation
                 return 0
-            if num_alive_neighbors >= 2 and num_alive_neighbors <= 3:
+            if num_alive_neighbors >= int(self.underpop_entry.get()) and num_alive_neighbors <= int(self.overpop_entry.get()):
                 return 1
         elif self.grids[self.active_grid][row_index][col_index] == 0:  # dead
-            if num_alive_neighbors == 3:  # birth
+            if num_alive_neighbors == int(self.birth_entry.get()):  # birth
                 return 1
 
         return self.grids[self.active_grid][row_index][col_index]
@@ -140,7 +163,7 @@ class Test(tk.Tk):
         self.active_grid = 0
         self.init_grids()
         self.set_grid(0)
-        self.draw_canvas()
+        # self.draw_canvas()
 
     def redraw(self, delay):
         if self.game_over == 1:
