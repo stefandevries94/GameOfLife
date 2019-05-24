@@ -10,19 +10,19 @@ class Test(tk.Tk):
 
         # GAME SETTINGS
         self.cellwidth = self.cellheight = 10
-        print(self.cellwidth)
         self.num_col = int(500 / self.cellwidth)
         self.num_row = int(500 / self.cellheight)
         self.speed = 100
+        self.alive_color = "black"
+        self.dead_color = "white"
 
-
+        # INITIALIZING GAME
         self.active_grid = 0
         self.grids = []
         self.init_grids()
         # self.set_grid()
         self.draw_canvas()
         self.canvas.bind("<Button-1>", self.callback)
-
         self.game_over = -1
 
         # SIMULATION BUTTONS
@@ -62,9 +62,7 @@ class Test(tk.Tk):
         birth.insert(0, 3)
         birth.grid(row=2, column=1)
 
-
-
-    def init_grids(self):
+    def init_grids(self):  # set up the grid containing 0's for each cell in the matrix
         def create_grid():
             rows = []
             for row_num in range(self.num_row):
@@ -72,7 +70,7 @@ class Test(tk.Tk):
                 rows.append(list_of_columns)
             return rows
 
-        self.grids.append(create_grid())
+        self.grids.append(create_grid())  # this is done twice one for the active grid and one for the inactive grid
         self.grids.append(create_grid())
 
     def set_grid(self, value=None):
@@ -93,9 +91,9 @@ class Test(tk.Tk):
                 x2 = x1 + self.cellheight
                 y2 = y1 + self.cellwidth
                 if self.grids[self.active_grid][row][column] == 1:
-                    color = "black"
+                    color = self.alive_color
                 else:
-                    color = "white"
+                    color = self.dead_color
                 self.rect[(row,column)] = self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, tags="rect")
 
     def callback(self, event):
@@ -103,10 +101,10 @@ class Test(tk.Tk):
         row = int(event.y//self.cellheight)
         if not self.grids[self.active_grid][row][col]:
             self.grids[self.active_grid][row][col] = 1
-            self.canvas.itemconfig(self.rect[(col, row)], fill="black")
+            self.canvas.itemconfig(self.rect[(col, row)], fill=self.alive_color)
         else:
             self.grids[self.active_grid][row][col] = 0
-            self.canvas.itemconfig(self.rect[(col, row)], fill="white")
+            self.canvas.itemconfig(self.rect[(col, row)], fill=self.dead_color)
 
     def clear_screen(self):
         self.rect = dict()
@@ -116,7 +114,12 @@ class Test(tk.Tk):
                 self.y1 = row * self.cellheight
                 self.x2 = self.x1 + self.cellwidth
                 self.y2 = self.y1 + self.cellheight
-                self.rect[(row, column)] = self.canvas.create_rectangle(self.x1, self.y1, self.x2, self.y2, fill="white", tags="rect")
+                self.rect[(row, column)] = self.canvas.create_rectangle(self.x1,
+                                                                        self.y1,
+                                                                        self.x2,
+                                                                        self.y2,
+                                                                        fill=self.dead_color,
+                                                                        tags="rect")
 
     def get_cell(self, r, c):
         try:
@@ -177,10 +180,10 @@ class Test(tk.Tk):
             for r in range(self.num_row):
                 for c in range(self.num_col):
                     if self.grids[self.active_grid][r][c] == 1:
-                        color = "black"
+                        color = self.alive_color
 
                     else:
-                        color = "white"
+                        color = self.dead_color
                     self.canvas.itemconfig(self.rect[(c,r)], fill=color)
 
             self.after(delay, lambda: self.redraw(delay))
