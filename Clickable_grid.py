@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import random
 
 
@@ -198,8 +199,26 @@ class Test(tk.Tk):
             self.after(delay, lambda: self.redraw(delay))
             self.update_generation()
 
+    def test_int(self):
+        try:
+            int(self.overpop_entry.get())
+        except ValueError:
+            tk.messagebox.showerror("error message", "Over population entry is not a number")
+            self.game_over = 1
+        try:
+            int(self.underpop_entry.get())
+        except ValueError:
+            tk.messagebox.showerror("error message", "Under population entry is not a number")
+            self.game_over = 1
+        try:
+            int(self.birth_entry.get())
+        except ValueError:
+            tk.messagebox.showerror("error message", "Birth entry is not a number")
+            self.game_over = 1
+
     def run(self):
         self.game_over = -1
+        self.test_int()
         self.redraw(self.speed)
 
 if __name__ == "__main__":
