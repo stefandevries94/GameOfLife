@@ -74,6 +74,10 @@ class Test(tk.Tk):
         self.grids.append(create_grid())
 
     def set_grid(self, value=None):
+        """
+        Sets a random grid or a grid filled with 0 or 1.
+        TODO: Check if it's possible to add in templates for specific patterns
+        """
         for r in range(self.num_row):
             for c in range(self.num_col):
                 if value is None:
@@ -83,6 +87,11 @@ class Test(tk.Tk):
                 self.grids[self.active_grid][r][c] = cell_value
 
     def draw_canvas(self):
+        """
+        Creates the visual grid,
+        color of a cell is depended on the value in the grid.
+        This should only be ran once, otherwise it will fill up the memory with all added rectangles.
+        """
         self.rect = dict()
         for row in range(self.num_row):
             for column in range(self.num_col):
@@ -94,9 +103,13 @@ class Test(tk.Tk):
                     color = self.alive_color
                 else:
                     color = self.dead_color
-                self.rect[(row,column)] = self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, tags="rect")
+                self.rect[(row, column)] = self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, tags="rect")
 
     def callback(self, event):
+        """
+        Makes it possible to change the value of the cell that is clicked,
+        at the same time it changes the fill of the visual grid
+        """
         col = int(event.x//self.cellwidth)
         row = int(event.y//self.cellheight)
         if not self.grids[self.active_grid][row][col]:
@@ -106,22 +119,7 @@ class Test(tk.Tk):
             self.grids[self.active_grid][row][col] = 0
             self.canvas.itemconfig(self.rect[(col, row)], fill=self.dead_color)
 
-    def clear_screen(self):
-        self.rect = dict()
-        for row in range(self.num_row):
-            for column in range(self.num_col):
-                self.x1 = column * self.cellwidth
-                self.y1 = row * self.cellheight
-                self.x2 = self.x1 + self.cellwidth
-                self.y2 = self.y1 + self.cellheight
-                self.rect[(row, column)] = self.canvas.create_rectangle(self.x1,
-                                                                        self.y1,
-                                                                        self.x2,
-                                                                        self.y2,
-                                                                        fill=self.dead_color,
-                                                                        tags="rect")
-
-    def get_cell(self, r, c):
+    def get_cell(self, r, c):  # necessary for finding the neighbors of a specific cell
         try:
             cell_value = self.grids[self.active_grid][r][c]
         except:
@@ -129,6 +127,12 @@ class Test(tk.Tk):
         return cell_value
 
     def check_neighbors(self, row_index, col_index):
+        """
+        Here the values of the neighbors of a cell are first summed up,
+        based on the rules the cell will get a specific value assigned.
+
+        TODO: add an option for what type of neighbors (additional layer, only direct neighbors, etc.)
+        """
         num_alive_neighbors = 0
         num_alive_neighbors += self.get_cell(row_index - 1, col_index - 1)
         num_alive_neighbors += self.get_cell(row_index - 1, col_index)
@@ -171,9 +175,14 @@ class Test(tk.Tk):
         self.active_grid = 0
         self.init_grids()
         self.set_grid(0)
-        # self.draw_canvas()
 
     def redraw(self, delay):
+        """
+        This draws the grid for each new generation.
+        Unlike draw_canvas it will not create new rectangles but just fill them.
+
+        :param delay: indicates how much ms is between running the code again.
+        """
         if self.game_over == 1:
             print("stopped")
         else:
