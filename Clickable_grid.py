@@ -38,7 +38,7 @@ class Test(tk.Tk):
         reset_button = tk.Button(self.button_frame, text="Reset", command=self.reset_game)
         reset_button.pack(side="left")
 
-        # GAME RULES
+        # GAME RULES IN GUI
         self.rules_frame = tk.Frame()
         self.rules_frame.pack()
 
@@ -63,6 +63,7 @@ class Test(tk.Tk):
         birth.insert(0, 3)
         birth.grid(row=2, column=1)
 
+    # Functions for running the game
     def init_grids(self):  # set up the grid containing 0's for each cell in the matrix
         def create_grid():
             rows = []
@@ -169,14 +170,6 @@ class Test(tk.Tk):
     def inactive_grid(self):
         return (self.active_grid + 1) % 2
 
-    def stop_game(self):
-        self.game_over = self.game_over*-1
-
-    def reset_game(self):
-        self.active_grid = 0
-        self.init_grids()
-        self.set_grid(0)
-
     def redraw(self, delay):
         """
         This draws the grid for each new generation.
@@ -215,6 +208,14 @@ class Test(tk.Tk):
         except ValueError:
             tk.messagebox.showerror("error message", "Birth entry is not a number")
             self.game_over = 1
+
+    def stop_game(self):
+        self.game_over = self.game_over*-1
+
+    def reset_game(self):
+        self.active_grid = 0
+        self.init_grids()
+        self.set_grid(0)
 
     def run(self):
         self.game_over = -1
