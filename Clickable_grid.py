@@ -6,13 +6,13 @@ import random
 class Test(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.canvas = tk.Canvas(self, width=500, height=500, borderwidth=0, highlightthickness=0)
+        self.canvas = tk.Canvas(self, width=600, height=600, borderwidth=0, highlightthickness=0)
         self.canvas.pack(side="top", expand="true")
 
         # GAME SETTINGS
         self.cellwidth = self.cellheight = 10
-        self.num_col = int(500 / self.cellwidth)
-        self.num_row = int(500 / self.cellheight)
+        self.num_col = int(600 / self.cellwidth)
+        self.num_row = int(600 / self.cellheight)
         self.speed = 100
         self.alive_color = "black"
         self.dead_color = "white"
