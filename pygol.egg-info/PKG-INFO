@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: pygol
+Version: 1.0
+Summary: Conway's Game of Life, made with tkinter
+Home-page: https://github.com/stefandevries94/GameOfLife.git
+Author: stefan94
+Author-email: stefandevries94@gmail.com
+License: UNKNOWN
+Description: # GameOfLife
+        
+        This program is build to demonstrate Conway's game of life. 
+        The game has several specific rules that create patterns, based on which cells are alive and which are dead.
+        Although the rules in Conway's game of life are very specific this program will give the user the option to experiment
+        with these rules. 
+        It is possible to change the set of rules to investigate what happens when the rules are slightly changed.
+        <br/>
+        <br/>
+        To run the game use pygol.gameoflife.rungame()
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
