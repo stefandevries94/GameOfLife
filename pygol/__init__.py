@@ -4,7 +4,7 @@ import random
 import sys
 
 
-class Test(tk.Tk):
+class Game(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.canvas = tk.Canvas(self, width=600, height=600, borderwidth=0, highlightthickness=0)
@@ -66,8 +66,6 @@ class Test(tk.Tk):
         birth = tk.Entry(self.rules_frame, textvariable=self.birth_entry, justify=tk.RIGHT, width=2)
         birth.insert(0, 3)
         birth.grid(row=2, column=1)
-
-
 
     # Functions for running the game
     def init_grids(self):  # set up the grid containing 0's for each cell in the matrix
@@ -233,6 +231,6 @@ class Test(tk.Tk):
 
 
 def rungame():
-    Test().mainloop()
+    Game().mainloop()
 
 
