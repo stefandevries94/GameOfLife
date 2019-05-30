@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a07ff35a-bb15-4cd5-98a4-6e3eefe7ab0d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pygol-1.0.tar.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pygol.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/pygol.egg-info/PKG-INFO" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pygol.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pygol.egg-info/SOURCES.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pygol/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pygol/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pygol/gameoflife.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pygol/gameoflife.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pygol/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3570">
-              <caret line="238" selection-start-line="238" selection-end-line="238" />
+            <state relative-caret-position="362">
+              <caret line="238" lean-forward="true" selection-start-line="230" selection-start-column="26" selection-end-line="238" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -28,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            <state relative-caret-position="105">
+              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -66,12 +71,13 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/main_file.py" />
         <option value="$PROJECT_DIR$/PyGoL/__init__.py" />
-        <option value="$PROJECT_DIR$/pygol/gameoflife.py" />
         <option value="$PROJECT_DIR$/pygol/LICENSE" />
         <option value="$PROJECT_DIR$/pygol/README.md" />
         <option value="$PROJECT_DIR$/Clickable_grid.py" />
         <option value="$PROJECT_DIR$/pygol/pygol/gameoflife.py" />
         <option value="$PROJECT_DIR$/pygol/setup.py" />
+        <option value="$PROJECT_DIR$/pygol/gameoflife.py" />
+        <option value="$PROJECT_DIR$/pygol/__init__.py" />
         <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
@@ -273,7 +279,7 @@
     <frame x="40" y="23" width="1400" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2790869" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28645065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.3298969" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -315,16 +321,6 @@
     <entry file="file://$PROJECT_DIR$/pygol/setup.py" />
     <entry file="file://$PROJECT_DIR$/pygol/LICENSE" />
     <entry file="file://$PROJECT_DIR$/pygol/README.md" />
-    <entry file="file://$PROJECT_DIR$/pygol/gameoflife.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3570">
-          <caret line="238" selection-start-line="238" selection-end-line="238" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -333,10 +329,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pygol/gameoflife.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state relative-caret-position="105">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pygol/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="238" lean-forward="true" selection-start-line="230" selection-start-column="26" selection-end-line="238" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

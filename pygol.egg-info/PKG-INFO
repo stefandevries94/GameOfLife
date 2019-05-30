@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pygol
-Version: 1.0
+Version: 1.1
 Summary: Conway's Game of Life, made with tkinter
 Home-page: https://github.com/stefandevries94/GameOfLife.git
 Author: stefan94

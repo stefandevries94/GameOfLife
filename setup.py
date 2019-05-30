@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pygol",
-    version="1.0",
+    version="1.1",
     author="stefan94",
     author_email="stefandevries94@gmail.com",
     description="Conway's Game of Life, made with tkinter",
